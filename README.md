@@ -172,3 +172,60 @@ stateSecret = afs4f4g8e4asgaas
 ; google+ scopes https://developers.google.com/+/api/oauth#scopes
 requestedRights = https://www.googleapis.com/auth/plus.login,https://www.googleapis.com/auth/plus.me,https://www.googleapis.com/auth/userinfo.email
 ```
+
+Authentiq API OAuth 2
+-------------------------------
+
+1) Add the latest Zend Framework and the Chrisweb library to the library directory.
+
+2) Setup an Apache vhost for the example:
+
+apache vhost.conf
+
+```
+NameVirtualHost *:80
+
+NameVirtualHost *:8000
+
+<VirtualHost *:80 *:8000>
+
+    ServerName www.authentiqclient.dev
+    DocumentRoot /path/to/examples/authentiqclient/public
+    ErrorLog "logs/authentiqclient-error.log"
+    CustomLog "logs/authentiqclient-access.log" combined
+    SetEnv APPLICATION_ENV "development"
+
+    <Directory /path/to/examples/authentiqclient/public>
+        DirectoryIndex index.php
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+</VirtualHost>
+```
+
+3) Update your hosts file:
+
+127.0.0.1 www.authentiqclient.dev
+
+4) Create a Google+ API account, then create a configuration file and add the values:
+
+```
+; application/configs/authentiq_api.ini
+
+; https://developers.google.com/+/api/oauth
+
+; authentiq api configuration
+oauthEndpoint = https://connect.authentiq.io/
+dialogEndpoint = https://connect.authentiq.io/
+clientId = examples-flask-basic
+clientSecret = ed25519
+callbackUrl = http://authentiqclient.dev:8000/authorized
+accessTokenUri = /token
+requestedRights = email
+responseType = code
+grantType = authorization_code
+oauthDialogUri = /authorize
+userInfo = userinfo (authentiq specific user info endpoint)
+```
