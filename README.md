@@ -209,12 +209,10 @@ NameVirtualHost *:8000
 
 127.0.0.1 www.authentiqclient.dev
 
-4) Create a Google+ API account, then create a configuration file and add the values:
+4) Create an Authentiq API account, then create a configuration file and add the values:
 
 ```
 ; application/configs/authentiq_api.ini
-
-; https://developers.google.com/+/api/oauth
 
 ; authentiq api configuration
 oauthEndpoint = https://connect.authentiq.io/
@@ -227,5 +225,5 @@ requestedRights = email
 responseType = code
 grantType = authorization_code
 oauthDialogUri = /authorize
-userInfo = userinfo (authentiq specific user info endpoint)
+userInfo = userinfo
 ```
