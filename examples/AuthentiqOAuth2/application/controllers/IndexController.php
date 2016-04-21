@@ -33,8 +33,8 @@ class IndexController extends Zend_Controller_Action
 
         $authentiqOauth2ConfigArray = $authentiqOauth2Config->toArray();
         $authentiqOauth2ConfigArray['state'] = $state;
-		// print_r($authentiqOauth2ConfigArray);
-		// start the authentiq oauth 2 workflow
+        // print_r($authentiqOauth2ConfigArray);
+        // start the authentiq oauth 2 workflow
         $chriswebOauth2 = new Chrisweb_Oauth2($authentiqOauth2ConfigArray);
 
         $chriswebOauth2->authorizationRedirect();
