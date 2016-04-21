@@ -26,16 +26,15 @@ class IndexController extends Zend_Controller_Action
 
         // create a secret state, insert it in the options an put it into the
         // session to validate it during the next step
-        // $state = $authentiqOauth2Config -> stateSecret.md5(uniqid(rand(), TRUE));
-        $state = "1234567890";
-
+        $state = $authentiqOauth2Config -> stateSecret.md5(uniqid(rand(), TRUE));
+        
         $oauthSessionNamespace = new Zend_Session_Namespace('oauthSessionNamespace');
         $oauthSessionNamespace->state = $state;
 
         $authentiqOauth2ConfigArray = $authentiqOauth2Config->toArray();
         $authentiqOauth2ConfigArray['state'] = $state;
-        print_r($authentiqOauth2ConfigArray);
-        // start the authentiq oauth 2 workflow
+		// print_r($authentiqOauth2ConfigArray);
+		// start the authentiq oauth 2 workflow
         $chriswebOauth2 = new Chrisweb_Oauth2($authentiqOauth2ConfigArray);
 
         $chriswebOauth2->authorizationRedirect();
@@ -47,7 +46,7 @@ class IndexController extends Zend_Controller_Action
      * If you get an error like: Unable to Connect to ssl://....
      * ensure open_ssl extension is enabled in your php.ini, then restart apache
      */
-    public function authorizedCallbackAction()
+    public function authorizedAction()
     {
 
         $rawCode = $this->_request->getParam('code', null);
@@ -55,7 +54,8 @@ class IndexController extends Zend_Controller_Action
         $errorReason = $this->_request->getParam('error_reason', null);
 
         $oauthSessionNamespace = new Zend_Session_Namespace('oauthSessionNamespace');
-        $oauthSessionNamespace->state = "1234567890";
+        
+
 
         if (is_null($stateParameter)) {
 

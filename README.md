@@ -178,18 +178,13 @@ Authentiq API OAuth 2
 
 1) Add the latest Zend Framework and the Chrisweb library to the library directory.
 
-2) Setup an Apache vhost for the example:
+2) Setup an Apache vhost for the localhost example (or another example domain):
 
 apache vhost.conf
 
 ```
-NameVirtualHost *:80
-
-NameVirtualHost *:8000
-
 <VirtualHost *:80 *:8000>
 
-    ServerName www.authentiqclient.dev
     DocumentRoot /path/to/examples/authentiqclient/public
     ErrorLog "logs/authentiqclient-error.log"
     CustomLog "logs/authentiqclient-access.log" combined
@@ -205,11 +200,7 @@ NameVirtualHost *:8000
 </VirtualHost>
 ```
 
-3) Update your hosts file:
-
-127.0.0.1 www.authentiqclient.dev
-
-4) Create an Authentiq API account, then create a configuration file and add the values:
+3) Create an Authentiq API account, then create a configuration file and add the values:
 
 ```
 ; application/configs/authentiq_api.ini
@@ -219,7 +210,7 @@ oauthEndpoint = https://connect.authentiq.io/
 dialogEndpoint = https://connect.authentiq.io/
 clientId = examples-flask-basic
 clientSecret = ed25519
-callbackUrl = http://authentiqclient.dev:8000/authorized
+callbackUrl = http://localhost:8000/authorized
 accessTokenUri = /token
 requestedRights = email
 responseType = code
